@@ -45,6 +45,8 @@
     <Compile Include="CumRapDAO.cs" />
     <Compile Include="DangNhapDAO.cs" />
     <Compile Include="DataProvider.cs" />
+    <Compile Include="KeHoachDAO.cs" />
+    <Compile Include="LichChieuDAO.cs" />
     <Compile Include="PhimDAO.cs" />
     <Compile Include="PhimTheLoaiPhuDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

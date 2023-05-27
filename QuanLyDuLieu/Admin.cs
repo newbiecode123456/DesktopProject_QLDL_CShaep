@@ -23,6 +23,8 @@ namespace QuanLyDuLieu
         BindingSource BindingTheLoai = new BindingSource();
         BindingSource BindingRap = new BindingSource();
         BindingSource BindingCumRap = new BindingSource();
+        BindingSource BindingKeHoach = new BindingSource();
+        BindingSource BindingLichChieu = new BindingSource();
         private void LoadInit()
         {
             DataGridViewPhim.DataSource = BindingPhim;
@@ -37,6 +39,13 @@ namespace QuanLyDuLieu
             DataGridViewCumRap.DataSource = BindingCumRap;
             GetAllCumRap();
             GetBindingCumRap();
+            DataGridViewKeHoach.DataSource = BindingKeHoach;
+            GetAllKeHoach();
+            GetBindingKeHoach();
+            DataGridViewLichChieu.DataSource = BindingLichChieu;
+            GetAllLichChieu();
+            GetBindingLichChieu();
+
         }
 
 
@@ -314,6 +323,103 @@ namespace QuanLyDuLieu
         }
         #endregion
 
+        #region KeHoach
+        private void GetAllKeHoach()
+        {
+            BindingKeHoach.DataSource = KeHoachDAO.Instance.GetAllKeHoach();
+        }
+        private void GetBindingKeHoach()
+        {
+            txtMaPhimofKeHoach.DataBindings.Add(new Binding("Text", DataGridViewKeHoach.DataSource, "MaPhim", true, DataSourceUpdateMode.Never));
+            txtmaCumofKeHoach.DataBindings.Add(new Binding("Text", DataGridViewKeHoach.DataSource, "MaCum", true, DataSourceUpdateMode.Never));
+            DateTimePickerNgayKhoiChieuofKeHoach.DataBindings.Add(new Binding("Value", DataGridViewKeHoach.DataSource, "NgayKhoiChieu", true, DataSourceUpdateMode.Never));
+            DateTimePickerNgayKetThucofKeHoach.DataBindings.Add(new Binding("Value", DataGridViewKeHoach.DataSource, "NgayKetThuc", true, DataSourceUpdateMode.Never));
+            txtGhiChuofKeHoach.DataBindings.Add(new Binding("Text", DataGridViewKeHoach.DataSource, "GhiChu", true, DataSourceUpdateMode.Never));
+        }
+        private void btnThemKeHoach_Click(object sender, EventArgs e)
+        {
+            string MaPhim = txtMaPhimofKeHoach.Text;
+            string MaCum = txtmaCumofKeHoach.Text;
+            DateTime? NgayKhoiChieu = DateTimePickerNgayKhoiChieuofKeHoach.Value;
+            DateTime? NgayKetThuc = DateTimePickerNgayKetThucofKeHoach.Value;
+            string GhiChu = txtGhiChuofKeHoach.Text;
+            if (MessageBox.Show("Thêm Kế hoạch mới?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (KeHoachDAO.Instance.InsertKeHoach(MaPhim,MaCum,NgayKhoiChieu,NgayKetThuc,GhiChu))
+                {
+                    MessageBox.Show("Thêm Kế hoạch mới Thành công !!!!");
+                    GetAllKeHoach();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm kế hoạch KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnSuaKeHoach_Click(object sender, EventArgs e)
+        {
+            string MaPhim = txtMaPhimofKeHoach.Text;
+            string MaCum = txtmaCumofKeHoach.Text;
+            DateTime? NgayKhoiChieu = DateTimePickerNgayKhoiChieuofKeHoach.Value;
+            DateTime? NgayKetThuc = DateTimePickerNgayKetThucofKeHoach.Value;
+            string GhiChu = txtGhiChuofKeHoach.Text;
+            if (MessageBox.Show("Sửa Ghi chú cho Kế hoạch ?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (KeHoachDAO.Instance.UpdateKeHoach(MaPhim, MaCum, NgayKhoiChieu, NgayKetThuc, GhiChu))
+                {
+                    MessageBox.Show("Sửa Ghi chú cho Kế hoạch Thành công !!!!");
+                    GetAllKeHoach();
+                }
+                else
+                {
+                    MessageBox.Show("Sửa Ghi chú cho kế hoạch KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnXoaKeHoach_Click(object sender, EventArgs e)
+        {
+            string MaPhim = txtMaPhimofKeHoach.Text;
+            string MaCum = txtmaCumofKeHoach.Text;
+            DateTime? NgayKhoiChieu = DateTimePickerNgayKhoiChieuofKeHoach.Value;
+            DateTime? NgayKetThuc = DateTimePickerNgayKetThucofKeHoach.Value;
+            string GhiChu = txtGhiChuofKeHoach.Text;
+            if (MessageBox.Show("Xoá Kế hoạch ?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (KeHoachDAO.Instance.DeleteKeHoach(MaPhim, MaCum, NgayKhoiChieu, NgayKetThuc))
+                {
+                    MessageBox.Show("Xoá Kế hoạch Thành công !!!!");
+                    GetAllKeHoach();
+                }
+                else
+                {
+                    MessageBox.Show("Xoá kế hoạch KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnXemKeHoach_Click(object sender, EventArgs e)
+        {
+            GetAllKeHoach();
+        }
+        #endregion
+
+        #region LichChieu
+        private void GetAllLichChieu()
+        {
+            BindingLichChieu.DataSource = LichChieuDAO.Instance.GetAllLichChieu();
+        }
+        private void GetBindingLichChieu()
+        {
+            txtMaPhim.DataBindings.Add(new Binding("Text", DataGridViewPhim.DataSource, "MaPhim", true, DataSourceUpdateMode.Never));
+            txtMaPhimofLichChieu.DataBindings.Add(new Binding("Text", DataGridViewLichChieu.DataSource, "MaPhim", true, DataSourceUpdateMode.Never));
+            txtMaRapofLichChieu.DataBindings.Add(new Binding("Text", DataGridViewLichChieu.DataSource, "MaRap", true, DataSourceUpdateMode.Never));
+            DateTimePickerNgayChieuofLichChieu.DataBindings.Add(new Binding("Value", DataGridViewLichChieu.DataSource, "NgayChieu", true, DataSourceUpdateMode.Never));
+            txtChuoiMaSuat.DataBindings.Add(new Binding("Text", DataGridViewLichChieu.DataSource, "ChuoiMaSuat", true, DataSourceUpdateMode.Never));
+        }
+        #endregion
+
         private void TabTheLoai_Click(object sender, EventArgs e)
         {
 
@@ -362,6 +468,31 @@ namespace QuanLyDuLieu
                 }
                 ComboBoxMaCumRap.SelectedIndex = index;
             }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
         }
 
         
