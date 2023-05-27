@@ -1,0 +1,17 @@
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\QuanLyDuLieu.exe.config
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\QuanLyDuLieu.exe
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\QuanLyDuLieu.pdb
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\DAO.dll
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\DTO.dll
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\DAO.pdb
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\bin\Debug\DTO.pdb
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.csproj.SuggestedBindingRedirects.cache
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.FormLogin.resources
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.Properties.Resources.resources
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.csproj.GenerateResource.cache
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.csproj.CopyComplete
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.exe
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.pdb
+C:\Users\Admin\Documents\SourceCSharp\QuanLyDuLieu\QuanLyDuLieu\obj\Debug\QuanLyDuLieu.FormAdmin.resources
