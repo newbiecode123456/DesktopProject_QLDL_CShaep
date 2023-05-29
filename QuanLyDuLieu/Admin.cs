@@ -25,6 +25,7 @@ namespace QuanLyDuLieu
         BindingSource BindingCumRap = new BindingSource();
         BindingSource BindingKeHoach = new BindingSource();
         BindingSource BindingLichChieu = new BindingSource();
+        BindingSource BindingSuatChieu = new BindingSource();
         private void LoadInit()
         {
             DataGridViewPhim.DataSource = BindingPhim;
@@ -45,7 +46,9 @@ namespace QuanLyDuLieu
             DataGridViewLichChieu.DataSource = BindingLichChieu;
             GetAllLichChieu();
             GetBindingLichChieu();
-
+            DataGridViewSuatChieu.DataSource = BindingSuatChieu;
+            GetAllSuatChieu();
+            GetBindingSuatChieu();
         }
 
 
@@ -412,14 +415,148 @@ namespace QuanLyDuLieu
         }
         private void GetBindingLichChieu()
         {
-            txtMaPhim.DataBindings.Add(new Binding("Text", DataGridViewPhim.DataSource, "MaPhim", true, DataSourceUpdateMode.Never));
             txtMaPhimofLichChieu.DataBindings.Add(new Binding("Text", DataGridViewLichChieu.DataSource, "MaPhim", true, DataSourceUpdateMode.Never));
             txtMaRapofLichChieu.DataBindings.Add(new Binding("Text", DataGridViewLichChieu.DataSource, "MaRap", true, DataSourceUpdateMode.Never));
             DateTimePickerNgayChieuofLichChieu.DataBindings.Add(new Binding("Value", DataGridViewLichChieu.DataSource, "NgayChieu", true, DataSourceUpdateMode.Never));
             txtChuoiMaSuat.DataBindings.Add(new Binding("Text", DataGridViewLichChieu.DataSource, "ChuoiMaSuat", true, DataSourceUpdateMode.Never));
         }
+        private void btnThemLichChieu_Click(object sender, EventArgs e)
+        {
+            string MaPhim = txtMaPhimofLichChieu.Text;
+            string MaRap = txtMaRapofLichChieu.Text;
+            DateTime? NgayChieu = DateTimePickerNgayChieuofLichChieu.Value;
+            string ChuoiMaSuat = txtChuoiMaSuat.Text;
+            if (MessageBox.Show("Thêm Lịch chiếu mới?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (LichChieuDAO.Instance.InsertLichChieu(MaPhim,MaRap,NgayChieu,ChuoiMaSuat))
+                {
+                    MessageBox.Show("Thêm Lịch chiếu mới Thành công !!!!");
+                    GetAllLichChieu();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm Lịch chiếu KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnSuaLichChieu_Click(object sender, EventArgs e)
+        {
+            string MaPhim = txtMaPhimofLichChieu.Text;
+            string MaRap = txtMaRapofLichChieu.Text;
+            DateTime? NgayChieu = DateTimePickerNgayChieuofLichChieu.Value;
+            string ChuoiMaSuat = txtChuoiMaSuat.Text;
+            if (MessageBox.Show("Sửa Chuỗi mã suất của Lịch chiếu?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (LichChieuDAO.Instance.UpdateLichChieu(MaPhim, MaRap, NgayChieu, ChuoiMaSuat))
+                {
+                    MessageBox.Show("Sửa Chuỗi mã suất của Lịch chiếu Thành công !!!!");
+                    GetAllLichChieu();
+                }
+                else
+                {
+                    MessageBox.Show("Sửa Chuỗi mã suất của Lịch chiếu KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnXoaLichChieu_Click(object sender, EventArgs e)
+        {
+            string MaPhim = txtMaPhimofLichChieu.Text;
+            string MaRap = txtMaRapofLichChieu.Text;
+            DateTime? NgayChieu = DateTimePickerNgayChieuofLichChieu.Value;
+            if (MessageBox.Show("Xoá Lịch chiếu?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (LichChieuDAO.Instance.DeleteLichChieu(MaPhim, MaRap, NgayChieu))
+                {
+                    MessageBox.Show("Xoá Lịch chiếu Thành công !!!!");
+                    GetAllLichChieu();
+                }
+                else
+                {
+                    MessageBox.Show("Xoá Lịch chiếu KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnXemLichChieu_Click(object sender, EventArgs e)
+        {
+            GetAllLichChieu();
+        }
         #endregion
 
+        #region SuatChieu
+        private void GetAllSuatChieu()
+        {
+            BindingSuatChieu.DataSource = SuatChieuDAO.Instance.GetAllSuatChieu();
+        }
+        private void GetBindingSuatChieu()
+        {
+            txtMaSuatChieuofSuatChieu.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "MaSuat", true, DataSourceUpdateMode.Never));
+            txtGioBatDauofSuatChieu.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "GioBatDau", true, DataSourceUpdateMode.Never));
+            txtPhutBatDauofSuatChieu.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "PhutBatDau", true, DataSourceUpdateMode.Never));
+        }
+        private void btnThemSuatChieu_Click(object sender, EventArgs e)
+        {
+            string MaSuat = txtMaSuatChieuofSuatChieu.Text;
+            int GioBatDau = Convert.ToInt32(txtGioBatDauofSuatChieu.Text);
+            int PhutBatDau = Convert.ToInt32(txtPhutBatDauofSuatChieu.Text);
+            if (MessageBox.Show("Thêm Suất chiếu mới?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (SuatChieuDAO.Instance.InsertSuatChieu(MaSuat,GioBatDau,PhutBatDau))
+                {
+                    MessageBox.Show("Thêm Suất chiếu mới Thành công !!!!");
+                    GetAllSuatChieu();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm Suất chiếu KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnSuaSuatChieu_Click(object sender, EventArgs e)
+        {
+            string MaSuat = txtMaSuatChieuofSuatChieu.Text;
+            int GioBatDau = Convert.ToInt32(txtGioBatDauofSuatChieu.Text);
+            int PhutBatDau = Convert.ToInt32(txtPhutBatDauofSuatChieu.Text);
+            if (MessageBox.Show("Sửa thông tin Suất chiếu?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (SuatChieuDAO.Instance.UpdateSuatChieu(MaSuat, GioBatDau, PhutBatDau))
+                {
+                    MessageBox.Show("Sửa thông tin Suất chiếu Thành công !!!!");
+                    GetAllSuatChieu();
+                }
+                else
+                {
+                    MessageBox.Show("Sửa thông tin Suất chiếu KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnXoaSuatChieu_Click(object sender, EventArgs e)
+        {
+            string MaSuat = txtMaSuatChieuofSuatChieu.Text;
+            if (MessageBox.Show("Xoá Suất chiếu?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
+            {
+                if (SuatChieuDAO.Instance.DeleteSuatChieu(MaSuat))
+                {
+                    MessageBox.Show("Xoá Suất chiếu Thành công !!!!");
+                    GetAllSuatChieu();
+                }
+                else
+                {
+                    MessageBox.Show("Xoá Suất chiếu KHÔNG thành công!!!!");
+                }
+            }
+        }
+
+        private void btnXemSuatChieu_Click(object sender, EventArgs e)
+        {
+            GetAllSuatChieu();
+        }
+
+        #endregion
         private void TabTheLoai_Click(object sender, EventArgs e)
         {
 

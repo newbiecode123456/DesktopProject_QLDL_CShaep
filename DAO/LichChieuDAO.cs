@@ -27,5 +27,24 @@ namespace DAO
             }
             return lichChieus;
         }
+        public bool InsertLichChieu(string MaPhim,string MaRap,DateTime? NgayChieu,string ChuoiMaSuat)
+        {
+            string query = "USP_InsertLichChieu @MaPhim , @MaRap , @NgayChieu , @ChuoiMaSuat ";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim, MaRap, NgayChieu, ChuoiMaSuat });
+            return result > 0;
+        }
+        public bool UpdateLichChieu(string MaPhim, string MaRap, DateTime? NgayChieu, string ChuoiMaSuat)
+        {
+            string query = "USP_UpdateLichChieu @MaPhim , @MaRap , @NgayChieu , @ChuoiMaSuat";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim, MaRap, NgayChieu, ChuoiMaSuat });        
+            return result > 0;
+        }
+        public bool DeleteLichChieu(string MaPhim,string MaRap,DateTime? NgayChieu)
+        {
+            string query = "USP_DeleteLichChieu @MaPhim , @MaRap , @NgayChieu";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim, MaRap, NgayChieu });
+            return result > 0;
+        }
+
     }
 }

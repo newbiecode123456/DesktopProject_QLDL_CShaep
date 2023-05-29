@@ -9,15 +9,15 @@ namespace DTO
 {
     public class SuatChieu
     {
-        public SuatChieu(string masuat,int giobatdau,int gioketthuc) { 
+        public SuatChieu(string masuat,int giobatdau,int phutbatdau) { 
             this.Masuat = masuat;
             this.Giobatdau = giobatdau;
-            this.Gioketthuc = gioketthuc;
+            this.Phutbatdau = phutbatdau;
         }
         public SuatChieu(DataRow row) {
             this.Masuat = (string)row["MaSuat"];
             this.Giobatdau = (int)row["GioBatDau"];
-            this.Gioketthuc = (int)row["GioKetThuc"];
+            this.Phutbatdau = (int)row["PhutBatDau"];
         }
         private string masuat;
         public string Masuat
@@ -31,11 +31,11 @@ namespace DTO
             get { return giobatdau; }
             set { giobatdau = value; }
         }
-        private int gioketthuc;
-        public int Gioketthuc
+        private int phutbatdau;
+        public int Phutbatdau
         {
-            get { return gioketthuc; }
-            set { gioketthuc = value; }
+            get { return phutbatdau; }
+            set { phutbatdau = value; }
         }
     }
 }

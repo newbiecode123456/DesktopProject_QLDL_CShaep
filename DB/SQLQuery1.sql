@@ -74,10 +74,11 @@ create table LichChieu
 	MaRap varchar(5),
 	NgayChieu date,
 	ChuoiMaSuat nvarchar(100)
-	PRIMARY KEY (MaPhim, MaRap, NgayChieu,ChuoiMaSuat)
+	PRIMARY KEY (MaPhim, MaRap, NgayChieu)
 	foreign key (MaPhim) references Phim(MaPhim),
 	foreign key (MaRap) references Rap(MaRap)
 )
+--alter table LichChieu alter column ChuoiMaSuat varchar(100)
 -- Đăng nhập
 create table DangNhap
 (
@@ -325,4 +326,51 @@ as begin
 end
 go
 
-select * from Rap
+create proc USP_InsertLichChieu 
+@MaPhim varchar(10), @MaRap varchar(5), @NgayChieu DateTime, @ChuoiMaSuat varchar(100)
+as begin
+	insert LichChieu(MaPhim,MaRap,NgayChieu,ChuoiMaSuat)
+	values(@MaPhim,@MaRap,@NgayChieu,@ChuoiMaSuat)
+end
+go
+
+create proc USP_UpdateLichChieu 
+@MaPhim varchar(10), @MaRap varchar(5), @NgayChieu DateTime, @ChuoiMaSuat varchar(100)
+as begin
+	update LichChieu
+	set ChuoiMaSuat =@ChuoiMaSuat
+	where MaPhim = @MaPhim and MaRap=@MaRap and NgayChieu=@NgayChieu
+end 
+go
+
+create proc USP_DeleteLichChieu 
+@MaPhim varchar(10), @MaRap varchar(5), @NgayChieu DateTime
+as begin
+	delete LichChieu
+	where MaPhim = @MaPhim and MaRap=@MaRap and NgayChieu=@NgayChieu
+end
+go
+
+-- USP of SuatChieuDAO
+create proc USP_GetAllSuatChieu
+as begin
+	select * from SuatChieu
+end
+go
+
+create proc USP_InsertSuatChieu 
+@MaSuat varchar(3), @GioBatDau int , @PhutBatDau int
+as begin
+	insert SuatChieu(MaSuat,GioBatDau,PhutBatDau)
+	values(@MaSuat,@GioBatDau,@PhutBatDau)
+end
+go
+
+create proc USP_UpdateSuatChieu 
+@MaSuat varchar(3), @GioBatDau int , @PhutBatDau int
+as begin
+	update SuatChieu
+	set GioBatDau=@GioBatDau,PhutBatDau=@PhutBatDau
+	where MaSuat=@MaSuat
+end
+go
