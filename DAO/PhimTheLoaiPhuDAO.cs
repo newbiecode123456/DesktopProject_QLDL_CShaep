@@ -27,5 +27,11 @@ namespace DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query,new object[] { MaTheLoai });
             return result > 0;
         }
+        public bool CheckorUncheckPhimTheLoaiPhu(string MaPhim,string MaTheLoai)
+        {
+            string query = "USP_CheckorUncheckPhimTheLoaiPhu @MaPhim , @MaTheLoai";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim , MaTheLoai });
+            return result > 0;
+        }
     }
 }

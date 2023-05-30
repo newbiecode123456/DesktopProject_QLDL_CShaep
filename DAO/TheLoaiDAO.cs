@@ -53,6 +53,19 @@ namespace DAO
             }
             return TLCofP;
         }
+
+        public List<TheLoai> GetAllTheLoaiPhuofPhim(string MaPhim)
+        {
+            List<TheLoai> theLoaiofPhims = new List<TheLoai>();
+            string query = "USP_GetAllTheLoaiPhuoffPhim @MaPhim";
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { MaPhim });
+            foreach(DataRow item in data.Rows)
+            {
+                TheLoai theloai = new TheLoai(item);
+                theLoaiofPhims.Add(theloai);
+            }
+            return theLoaiofPhims;
+        }
         public bool InsertTheLoai(string MaTheLoai,string TenTheLoai)
         {
             string query = "USP_InsertTheLoai @MaTheLoai , @TenTheLoai";

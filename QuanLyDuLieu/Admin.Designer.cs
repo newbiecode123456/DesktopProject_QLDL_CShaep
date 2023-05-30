@@ -112,13 +112,14 @@
             this.btnXoaSuatChieu = new System.Windows.Forms.Button();
             this.btnSuaSuatChieu = new System.Windows.Forms.Button();
             this.btnThemSuatChieu = new System.Windows.Forms.Button();
-            this.txtPhutBatDauofSuatChieu = new System.Windows.Forms.TextBox();
-            this.txtGioBatDauofSuatChieu = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.txtMaSuatChieuofSuatChieu = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.DataGridViewSuatChieu = new System.Windows.Forms.DataGridView();
+            this.NumericUpDownGioBatDau = new System.Windows.Forms.NumericUpDown();
+            this.NumericUpDownPhutBatDau = new System.Windows.Forms.NumericUpDown();
+            this.FlowLayoutPanelTheLoaiPhu = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControlAdmin.SuspendLayout();
             this.TabPhim.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPhim)).BeginInit();
@@ -134,6 +135,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLichChieu)).BeginInit();
             this.TabSuatChieu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewSuatChieu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownGioBatDau)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownPhutBatDau)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlAdmin
@@ -153,6 +156,7 @@
             // 
             // TabPhim
             // 
+            this.TabPhim.Controls.Add(this.FlowLayoutPanelTheLoaiPhu);
             this.TabPhim.Controls.Add(this.ComboBoxMaTheLoaiChinh);
             this.TabPhim.Controls.Add(this.btnXemPhim);
             this.TabPhim.Controls.Add(this.btnXoaPhim);
@@ -184,7 +188,7 @@
             // 
             // btnXemPhim
             // 
-            this.btnXemPhim.Location = new System.Drawing.Point(655, 279);
+            this.btnXemPhim.Location = new System.Drawing.Point(655, 341);
             this.btnXemPhim.Name = "btnXemPhim";
             this.btnXemPhim.Size = new System.Drawing.Size(99, 39);
             this.btnXemPhim.TabIndex = 12;
@@ -194,7 +198,7 @@
             // 
             // btnXoaPhim
             // 
-            this.btnXoaPhim.Location = new System.Drawing.Point(540, 279);
+            this.btnXoaPhim.Location = new System.Drawing.Point(540, 341);
             this.btnXoaPhim.Name = "btnXoaPhim";
             this.btnXoaPhim.Size = new System.Drawing.Size(99, 39);
             this.btnXoaPhim.TabIndex = 11;
@@ -204,7 +208,7 @@
             // 
             // btnSuaPhim
             // 
-            this.btnSuaPhim.Location = new System.Drawing.Point(655, 234);
+            this.btnSuaPhim.Location = new System.Drawing.Point(655, 296);
             this.btnSuaPhim.Name = "btnSuaPhim";
             this.btnSuaPhim.Size = new System.Drawing.Size(99, 39);
             this.btnSuaPhim.TabIndex = 10;
@@ -214,7 +218,7 @@
             // 
             // btnThemPhim
             // 
-            this.btnThemPhim.Location = new System.Drawing.Point(540, 234);
+            this.btnThemPhim.Location = new System.Drawing.Point(540, 296);
             this.btnThemPhim.Name = "btnThemPhim";
             this.btnThemPhim.Size = new System.Drawing.Size(99, 39);
             this.btnThemPhim.TabIndex = 9;
@@ -224,7 +228,7 @@
             // 
             // txtThoiLuong
             // 
-            this.txtThoiLuong.Location = new System.Drawing.Point(540, 206);
+            this.txtThoiLuong.Location = new System.Drawing.Point(540, 264);
             this.txtThoiLuong.Name = "txtThoiLuong";
             this.txtThoiLuong.Size = new System.Drawing.Size(214, 22);
             this.txtThoiLuong.TabIndex = 7;
@@ -232,6 +236,7 @@
             // txtTenPhim
             // 
             this.txtTenPhim.Location = new System.Drawing.Point(540, 51);
+            this.txtTenPhim.MaxLength = 49;
             this.txtTenPhim.Name = "txtTenPhim";
             this.txtTenPhim.Size = new System.Drawing.Size(214, 22);
             this.txtTenPhim.TabIndex = 6;
@@ -239,6 +244,7 @@
             // txtMaPhim
             // 
             this.txtMaPhim.Location = new System.Drawing.Point(622, 4);
+            this.txtMaPhim.MaxLength = 10;
             this.txtMaPhim.Name = "txtMaPhim";
             this.txtMaPhim.Size = new System.Drawing.Size(132, 22);
             this.txtMaPhim.TabIndex = 5;
@@ -247,7 +253,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(537, 187);
+            this.label4.Location = new System.Drawing.Point(537, 245);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 16);
             this.label4.TabIndex = 4;
@@ -353,6 +359,7 @@
             // txtTenTheLoai
             // 
             this.txtTenTheLoai.Location = new System.Drawing.Point(523, 62);
+            this.txtTenTheLoai.MaxLength = 49;
             this.txtTenTheLoai.Name = "txtTenTheLoai";
             this.txtTenTheLoai.Size = new System.Drawing.Size(245, 22);
             this.txtTenTheLoai.TabIndex = 5;
@@ -369,6 +376,7 @@
             // txtMaTheLoai
             // 
             this.txtMaTheLoai.Location = new System.Drawing.Point(622, 7);
+            this.txtMaTheLoai.MaxLength = 5;
             this.txtMaTheLoai.Name = "txtMaTheLoai";
             this.txtMaTheLoai.Size = new System.Drawing.Size(146, 22);
             this.txtMaTheLoai.TabIndex = 3;
@@ -473,6 +481,7 @@
             // txtTenRap
             // 
             this.txtTenRap.Location = new System.Drawing.Point(520, 60);
+            this.txtTenRap.MaxLength = 49;
             this.txtTenRap.Name = "txtTenRap";
             this.txtTenRap.Size = new System.Drawing.Size(248, 22);
             this.txtTenRap.TabIndex = 6;
@@ -489,6 +498,7 @@
             // txtmaRap
             // 
             this.txtmaRap.Location = new System.Drawing.Point(613, 7);
+            this.txtmaRap.MaxLength = 5;
             this.txtmaRap.Name = "txtmaRap";
             this.txtmaRap.Size = new System.Drawing.Size(155, 22);
             this.txtmaRap.TabIndex = 4;
@@ -587,6 +597,7 @@
             // txtDiaChi
             // 
             this.txtDiaChi.Location = new System.Drawing.Point(523, 127);
+            this.txtDiaChi.MaxLength = 99;
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(231, 22);
             this.txtDiaChi.TabIndex = 8;
@@ -603,6 +614,7 @@
             // txtTenCumRap
             // 
             this.txtTenCumRap.Location = new System.Drawing.Point(523, 73);
+            this.txtTenCumRap.MaxLength = 49;
             this.txtTenCumRap.Name = "txtTenCumRap";
             this.txtTenCumRap.Size = new System.Drawing.Size(231, 22);
             this.txtTenCumRap.TabIndex = 6;
@@ -619,6 +631,7 @@
             // txtMaCumRap
             // 
             this.txtMaCumRap.Location = new System.Drawing.Point(606, 10);
+            this.txtMaCumRap.MaxLength = 5;
             this.txtMaCumRap.Name = "txtMaCumRap";
             this.txtMaCumRap.Size = new System.Drawing.Size(148, 22);
             this.txtMaCumRap.TabIndex = 4;
@@ -701,6 +714,7 @@
             // txtmaCumofKeHoach
             // 
             this.txtmaCumofKeHoach.Location = new System.Drawing.Point(615, 38);
+            this.txtmaCumofKeHoach.MaxLength = 5;
             this.txtmaCumofKeHoach.Name = "txtmaCumofKeHoach";
             this.txtmaCumofKeHoach.Size = new System.Drawing.Size(153, 22);
             this.txtmaCumofKeHoach.TabIndex = 28;
@@ -708,6 +722,7 @@
             // txtMaPhimofKeHoach
             // 
             this.txtMaPhimofKeHoach.Location = new System.Drawing.Point(615, 4);
+            this.txtMaPhimofKeHoach.MaxLength = 10;
             this.txtMaPhimofKeHoach.Name = "txtMaPhimofKeHoach";
             this.txtMaPhimofKeHoach.Size = new System.Drawing.Size(153, 22);
             this.txtMaPhimofKeHoach.TabIndex = 27;
@@ -715,6 +730,7 @@
             // txtGhiChuofKeHoach
             // 
             this.txtGhiChuofKeHoach.Location = new System.Drawing.Point(532, 225);
+            this.txtGhiChuofKeHoach.MaxLength = 99;
             this.txtGhiChuofKeHoach.Name = "txtGhiChuofKeHoach";
             this.txtGhiChuofKeHoach.Size = new System.Drawing.Size(236, 22);
             this.txtGhiChuofKeHoach.TabIndex = 26;
@@ -861,6 +877,7 @@
             // txtChuoiMaSuat
             // 
             this.txtChuoiMaSuat.Location = new System.Drawing.Point(532, 171);
+            this.txtChuoiMaSuat.MaxLength = 99;
             this.txtChuoiMaSuat.Name = "txtChuoiMaSuat";
             this.txtChuoiMaSuat.Size = new System.Drawing.Size(236, 22);
             this.txtChuoiMaSuat.TabIndex = 33;
@@ -887,6 +904,7 @@
             // txtMaPhimofLichChieu
             // 
             this.txtMaPhimofLichChieu.Location = new System.Drawing.Point(615, 4);
+            this.txtMaPhimofLichChieu.MaxLength = 10;
             this.txtMaPhimofLichChieu.Name = "txtMaPhimofLichChieu";
             this.txtMaPhimofLichChieu.Size = new System.Drawing.Size(153, 22);
             this.txtMaPhimofLichChieu.TabIndex = 29;
@@ -894,6 +912,7 @@
             // txtMaRapofLichChieu
             // 
             this.txtMaRapofLichChieu.Location = new System.Drawing.Point(615, 38);
+            this.txtMaRapofLichChieu.MaxLength = 5;
             this.txtMaRapofLichChieu.Name = "txtMaRapofLichChieu";
             this.txtMaRapofLichChieu.Size = new System.Drawing.Size(153, 22);
             this.txtMaRapofLichChieu.TabIndex = 28;
@@ -929,12 +948,12 @@
             // 
             // TabSuatChieu
             // 
+            this.TabSuatChieu.Controls.Add(this.NumericUpDownPhutBatDau);
+            this.TabSuatChieu.Controls.Add(this.NumericUpDownGioBatDau);
             this.TabSuatChieu.Controls.Add(this.btnXemSuatChieu);
             this.TabSuatChieu.Controls.Add(this.btnXoaSuatChieu);
             this.TabSuatChieu.Controls.Add(this.btnSuaSuatChieu);
             this.TabSuatChieu.Controls.Add(this.btnThemSuatChieu);
-            this.TabSuatChieu.Controls.Add(this.txtPhutBatDauofSuatChieu);
-            this.TabSuatChieu.Controls.Add(this.txtGioBatDauofSuatChieu);
             this.TabSuatChieu.Controls.Add(this.label24);
             this.TabSuatChieu.Controls.Add(this.label23);
             this.TabSuatChieu.Controls.Add(this.txtMaSuatChieuofSuatChieu);
@@ -988,24 +1007,10 @@
             this.btnThemSuatChieu.UseVisualStyleBackColor = true;
             this.btnThemSuatChieu.Click += new System.EventHandler(this.btnThemSuatChieu_Click);
             // 
-            // txtPhutBatDauofSuatChieu
-            // 
-            this.txtPhutBatDauofSuatChieu.Location = new System.Drawing.Point(529, 146);
-            this.txtPhutBatDauofSuatChieu.Name = "txtPhutBatDauofSuatChieu";
-            this.txtPhutBatDauofSuatChieu.Size = new System.Drawing.Size(236, 22);
-            this.txtPhutBatDauofSuatChieu.TabIndex = 38;
-            // 
-            // txtGioBatDauofSuatChieu
-            // 
-            this.txtGioBatDauofSuatChieu.Location = new System.Drawing.Point(529, 90);
-            this.txtGioBatDauofSuatChieu.Name = "txtGioBatDauofSuatChieu";
-            this.txtGioBatDauofSuatChieu.Size = new System.Drawing.Size(236, 22);
-            this.txtGioBatDauofSuatChieu.TabIndex = 37;
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(526, 127);
+            this.label24.Location = new System.Drawing.Point(526, 109);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(81, 16);
             this.label24.TabIndex = 36;
@@ -1023,6 +1028,7 @@
             // txtMaSuatChieuofSuatChieu
             // 
             this.txtMaSuatChieuofSuatChieu.Location = new System.Drawing.Point(529, 26);
+            this.txtMaSuatChieuofSuatChieu.MaxLength = 3;
             this.txtMaSuatChieuofSuatChieu.Name = "txtMaSuatChieuofSuatChieu";
             this.txtMaSuatChieuofSuatChieu.Size = new System.Drawing.Size(236, 22);
             this.txtMaSuatChieuofSuatChieu.TabIndex = 34;
@@ -1046,6 +1052,38 @@
             this.DataGridViewSuatChieu.RowTemplate.Height = 24;
             this.DataGridViewSuatChieu.Size = new System.Drawing.Size(503, 381);
             this.DataGridViewSuatChieu.TabIndex = 20;
+            // 
+            // NumericUpDownGioBatDau
+            // 
+            this.NumericUpDownGioBatDau.Location = new System.Drawing.Point(645, 71);
+            this.NumericUpDownGioBatDau.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.NumericUpDownGioBatDau.Name = "NumericUpDownGioBatDau";
+            this.NumericUpDownGioBatDau.Size = new System.Drawing.Size(120, 22);
+            this.NumericUpDownGioBatDau.TabIndex = 43;
+            // 
+            // NumericUpDownPhutBatDau
+            // 
+            this.NumericUpDownPhutBatDau.Location = new System.Drawing.Point(645, 109);
+            this.NumericUpDownPhutBatDau.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.NumericUpDownPhutBatDau.Name = "NumericUpDownPhutBatDau";
+            this.NumericUpDownPhutBatDau.Size = new System.Drawing.Size(120, 22);
+            this.NumericUpDownPhutBatDau.TabIndex = 44;
+            // 
+            // FlowLayoutPanelTheLoaiPhu
+            // 
+            this.FlowLayoutPanelTheLoaiPhu.AutoScroll = true;
+            this.FlowLayoutPanelTheLoaiPhu.Location = new System.Drawing.Point(540, 127);
+            this.FlowLayoutPanelTheLoaiPhu.Name = "FlowLayoutPanelTheLoaiPhu";
+            this.FlowLayoutPanelTheLoaiPhu.Size = new System.Drawing.Size(214, 115);
+            this.FlowLayoutPanelTheLoaiPhu.TabIndex = 14;
             // 
             // FormAdmin
             // 
@@ -1077,6 +1115,8 @@
             this.TabSuatChieu.ResumeLayout(false);
             this.TabSuatChieu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewSuatChieu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownGioBatDau)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownPhutBatDau)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1157,8 +1197,6 @@
         private System.Windows.Forms.TabPage TabSuatChieu;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.DataGridView DataGridViewSuatChieu;
-        private System.Windows.Forms.TextBox txtPhutBatDauofSuatChieu;
-        private System.Windows.Forms.TextBox txtGioBatDauofSuatChieu;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtMaSuatChieuofSuatChieu;
@@ -1174,5 +1212,8 @@
         private System.Windows.Forms.Button btnXoaSuatChieu;
         private System.Windows.Forms.Button btnSuaSuatChieu;
         private System.Windows.Forms.Button btnThemSuatChieu;
+        private System.Windows.Forms.NumericUpDown NumericUpDownPhutBatDau;
+        private System.Windows.Forms.NumericUpDown NumericUpDownGioBatDau;
+        private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelTheLoaiPhu;
     }
 }

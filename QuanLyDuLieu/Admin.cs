@@ -67,6 +67,11 @@ namespace QuanLyDuLieu
 
         }
 
+        void GetAllTheLoaiPhuofPhim(string MaPhim)
+        {
+            
+        }
+
         #region Phim
         private void GetAllPhim()
         {
@@ -493,14 +498,14 @@ namespace QuanLyDuLieu
         private void GetBindingSuatChieu()
         {
             txtMaSuatChieuofSuatChieu.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "MaSuat", true, DataSourceUpdateMode.Never));
-            txtGioBatDauofSuatChieu.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "GioBatDau", true, DataSourceUpdateMode.Never));
-            txtPhutBatDauofSuatChieu.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "PhutBatDau", true, DataSourceUpdateMode.Never));
+            NumericUpDownGioBatDau.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "GioBatDau", true, DataSourceUpdateMode.Never));
+            NumericUpDownPhutBatDau.DataBindings.Add(new Binding("Text", DataGridViewSuatChieu.DataSource, "PhutBatDau", true, DataSourceUpdateMode.Never));
         }
         private void btnThemSuatChieu_Click(object sender, EventArgs e)
         {
             string MaSuat = txtMaSuatChieuofSuatChieu.Text;
-            int GioBatDau = Convert.ToInt32(txtGioBatDauofSuatChieu.Text);
-            int PhutBatDau = Convert.ToInt32(txtPhutBatDauofSuatChieu.Text);
+            int GioBatDau = Convert.ToInt32(NumericUpDownPhutBatDau.Text);
+            int PhutBatDau = Convert.ToInt32(NumericUpDownPhutBatDau.Text);
             if (MessageBox.Show("Thêm Suất chiếu mới?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 if (SuatChieuDAO.Instance.InsertSuatChieu(MaSuat,GioBatDau,PhutBatDau))
@@ -518,8 +523,8 @@ namespace QuanLyDuLieu
         private void btnSuaSuatChieu_Click(object sender, EventArgs e)
         {
             string MaSuat = txtMaSuatChieuofSuatChieu.Text;
-            int GioBatDau = Convert.ToInt32(txtGioBatDauofSuatChieu.Text);
-            int PhutBatDau = Convert.ToInt32(txtPhutBatDauofSuatChieu.Text);
+            int GioBatDau = Convert.ToInt32(NumericUpDownPhutBatDau.Text);
+            int PhutBatDau = Convert.ToInt32(NumericUpDownPhutBatDau.Text);
             if (MessageBox.Show("Sửa thông tin Suất chiếu?", "Thông báo", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
             {
                 if (SuatChieuDAO.Instance.UpdateSuatChieu(MaSuat, GioBatDau, PhutBatDau))
@@ -580,8 +585,48 @@ namespace QuanLyDuLieu
                     }
                     i++;
                 }
+                FlowLayoutPanelTheLoaiPhu.Controls.Clear();
                 ComboBoxMaTheLoaiChinh.SelectedIndex = index;
+                string MP = (string)DataGridViewPhim.SelectedCells[0].OwningRow.Cells["MaPhim"].Value;
+                List<TheLoai> theloaiphu = TheLoaiDAO.Instance.GetAllTheLoaiPhuofPhim(MP);
 
+                List<TheLoai> alltheloai = TheLoaiDAO.Instance.GetAllTheLoai();
+                
+                foreach(TheLoai atl in alltheloai)
+                {
+                    if (atl.Matheloai != MTLC)
+                    {
+                        CheckBox chkbx = new CheckBox();
+                        chkbx.Text = atl.Tentheloai;
+                        //chkbx.Enabled = false;
+                        PhimTheLoaiPhu tempPTLP = new PhimTheLoaiPhu(MP, atl.Matheloai);
+                        chkbx.Tag = tempPTLP;
+                        foreach (TheLoai tlp in theloaiphu)
+                        {
+                            if (tlp.Matheloai == atl.Matheloai)
+                            {
+                                chkbx.Checked = true;
+                            }
+                        }
+                        chkbx.Click += chk_Click;
+                        FlowLayoutPanelTheLoaiPhu.Controls.Add(chkbx);
+                    }
+                }
+            }
+
+
+        }
+
+        private void chk_Click(object sender, EventArgs e)
+        {
+            string MaPhim = ((sender as CheckBox).Tag as PhimTheLoaiPhu).Maphim;
+            string MaTheLoai = ((sender as CheckBox).Tag as PhimTheLoaiPhu).Matheloai;
+            if (PhimTheLoaiPhuDAO.Instance.CheckorUncheckPhimTheLoaiPhu(MaPhim, MaTheLoai))
+            {
+                MessageBox.Show("Đã cập nhật thể loại phụ");
+            } else
+            {
+                MessageBox.Show("Có lỗi xảy ra");
             }
         }
 

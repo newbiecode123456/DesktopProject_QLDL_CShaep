@@ -154,6 +154,14 @@ as begin
 end
 go
 
+create proc USP_GetAllTheLoaiPhuoffPhim 
+@MaPhim varchar(10)
+as begin 
+	select * from TheLoai as TL,PhimTheLoaiPhu as PTLP
+	where TL.MaTheLoai = PTLP.MaTheLoai and MaPhim = 'P0001'@MaPhim
+end
+go
+
 create proc USP_GetAllTheLoai
 as begin
 	select * from TheLoai
@@ -264,7 +272,7 @@ as begin
 end
 go
 
--- USP of MaTheLoaiPhuDAO
+-- USP of PhimTheLoaiPhuDAO
 create proc USP_DeletePhimTheLoaiPhuofPhim
 @MaPhim varchar(5)
 as begin
@@ -279,6 +287,22 @@ as begin
 	delete PhimTheLoaiPhu
 	where MaTheLoai = @MaTheLoai
 end 
+go
+
+alter proc USP_CheckorUncheckPhimTheLoaiPhu 
+@MaPhim varchar(10), @MaTheLoai varchar(5)
+as begin
+	declare @kt int = 0
+	select @kt = count(*) from PhimTheLoaiPhu where MaPhim=@MaPhim and MaTheLoai=@MaTheLoai
+	if(@kt>0)
+	begin
+		delete PhimTheLoaiPhu where MaPhim=@MaPhim and MaTheLoai=@MaTheLoai
+	end
+	else
+	begin
+		insert PhimTheLoaiPhu(MaPhim,MaTheLoai) values(@MaPhim,@MaTheLoai)
+	end
+end
 go
 
 -- USP of KeHoachDAO
@@ -371,6 +395,14 @@ create proc USP_UpdateSuatChieu
 as begin
 	update SuatChieu
 	set GioBatDau=@GioBatDau,PhutBatDau=@PhutBatDau
+	where MaSuat=@MaSuat
+end
+go
+
+create proc USP_DeleteSuatChieu 
+@MaSuat varchar(3)
+as begin
+	delete SuatChieu
 	where MaSuat=@MaSuat
 end
 go
