@@ -30,6 +30,19 @@ namespace DAO
             }
             return raps;
         }
+
+        public List<Rap> GetAllRapofCumRap(string MaCum)
+        {
+            List<Rap> raps = new List<Rap>();
+            string query = "USP_GetAllRapofCumRap @MaCum";
+            DataTable datarapofcum = DataProvider.Instance.ExecuteQuery(query, new object[] {MaCum});
+            foreach(DataRow row in datarapofcum.Rows)
+            {
+                Rap rap =new Rap(row);
+                raps.Add(rap);
+            }
+            return raps;
+        }
         public bool InsertRap(string MaRap,int TongGhe,string MaCum)
         {
             string query = "USP_InsertRap @MaRap , @TongGhe , @MaCum ";
@@ -44,6 +57,7 @@ namespace DAO
         }
         public bool DeleteRap(string MaRap)
         {
+            LichChieuDAO.Instance.DeleteLichChieuofRap(MaRap);
             string query = "USP_DeleteRap @MaRap";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaRap });
             return result > 0;

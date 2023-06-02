@@ -46,5 +46,32 @@ namespace DAO
             return result > 0;
         }
 
+        public bool CheckExistLichChieu(string MaRap, DateTime? NgayChieu)
+        {
+            string query = "USP_CheckExistLichChieu @MaRap , @NgayChieu";
+            int dem = (int)DataProvider.Instance.ExecuteScalar(query, new object[] {MaRap , NgayChieu});
+            return dem > 1;
+        }
+
+        public bool CheckIfExistLichChieu(string MaRap,DateTime? NgayChieu,string ChuoiMaSuat)
+        {
+            string query = "USP_CheckIfExistLichChieu @MaRap , @NgayChieu , @ChuoiMaSuat";
+            int dem = (int)DataProvider.Instance.ExecuteScalar(query, new object[] { MaRap, NgayChieu, ChuoiMaSuat });
+            return dem > 0;
+        }
+
+        public bool DeleteLichChieuofPhim(string MaPhim)
+        {
+            string query = "USP_DeleteLichChieuofPhim @MaPhim";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim });
+            return result > 0;
+        }
+        public bool DeleteLichChieuofRap(string MaRap)
+        {
+            string query = "USP_DeleteLichChieuofRap @MaRap";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaRap });
+            return result > 0;
+        }
+
     }
 }

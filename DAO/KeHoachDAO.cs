@@ -46,5 +46,18 @@ namespace DAO
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim, MaCum, NgayKhoiChieu, NgayKetThuc });
             return result > 0;
         }
+
+        public bool DeleteKeHoachofPhim(string MaPhim)
+        {
+            string query = "USP_DeleteKeHoachofPhim @MaPhim";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaPhim });
+            return result > 0;
+        }
+        public bool DeletekeHoachofCumRap(string MaCum)
+        {
+            string query = "USP_DeleteKeHoachofCumRap @MaCum";
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaCum });
+            return result > 0;
+        }
     }
 }

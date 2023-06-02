@@ -53,6 +53,8 @@
     <Compile Include="RapDAO.cs" />
     <Compile Include="SuatChieuDAO.cs" />
     <Compile Include="TheLoaiDAO.cs" />
+    <Compile Include="TongThoiLuongofMaCumDAO.cs" />
+    <Compile Include="TongThoiLuongofMaRapDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">

@@ -137,6 +137,14 @@ as begin
 	where MaPhim = @MaPhim
 end
 go
+
+create proc USP_GetPhimbyMaPhim 
+@MaPhim varchar(10)
+as begin
+	select * from Phim where MaPhim=@MaPhim
+end
+go
+
 -- USP of TheLoaiDAO
 create proc USP_GetAllTheLoaiofPhim
 @MaPhim varchar(10)
@@ -196,6 +204,13 @@ go
 create proc USP_GetAllRap
 as begin
 	select * from Rap
+end
+go
+
+create proc USP_GetAllRapofCumRap 
+@MaCum varchar(5)
+as begin
+	select * from Rap where MaCum= @MaCum
 end
 go
 
@@ -343,6 +358,15 @@ as begin
 end
 go
 
+create proc USP_DeleteKeHoachofPhim 
+@MaPhim varchar(10)
+as begin
+	delete KeHoach
+	where MaPhim=@MaPhim
+end
+go
+
+
 -- USP of LichChieuDAO
 create proc USP_GetAllLichChieu
 as begin
@@ -375,6 +399,35 @@ as begin
 end
 go
 
+create proc USP_CheckExistLichChieu 
+@MaRap varchar(5), @NgayChieu DateTime
+as begin
+	select count(*) from LichChieu where MaRap=@MaRap and NgayChieu=@NgayChieu
+end
+go
+
+create proc USP_CheckIfExistLichChieu
+@MaRap varchar(5), @NgayChieu DateTime, @ChuoiMaSuat varchar(3)
+as begin
+	select count(*) from LichChieu where MaRap=@MaRap and NgayChieu=@NgayChieu and ChuoiMaSuat like '%'+@ChuoiMaSuat+'%'
+end
+go
+
+create proc USP_DeleteLichChieuofPhim 
+@MaPhim varchar(10)
+as begin
+	delete LichChieu
+	where MaPhim =@MaPhim
+end
+go
+
+create proc USP_DeleteLichChieuofRap 
+@MaRap varchar(5)
+as begin
+	delete LichChieu
+	where MaRap=@MaRap
+end
+go
 -- USP of SuatChieuDAO
 create proc USP_GetAllSuatChieu
 as begin
@@ -382,11 +435,22 @@ as begin
 end
 go
 
-create proc USP_InsertSuatChieu 
-@MaSuat varchar(3), @GioBatDau int , @PhutBatDau int
+alter proc USP_InsertSuatChieu 
+@MaSuat varchar(5),@GioBatDau int , @PhutBatDau int
 as begin
-	insert SuatChieu(MaSuat,GioBatDau,PhutBatDau)
-	values(@MaSuat,@GioBatDau,@PhutBatDau)
+	declare @kt int
+	select @kt = count(*) from SuatChieu where GioBatDau=@GioBatDau or GioBatDau=@GioBatDau+1
+	if(@kt > 0)
+	begin 
+		update SuatChieu
+		set GioBatDau=@GioBatDau,PhutBatDau=@PhutBatDau
+		where MaSuat = @MaSuat
+	end
+	else
+	begin
+		insert SuatChieu(MaSuat,GioBatDau,PhutBatDau)
+		values(@MaSuat,@GioBatDau,@PhutBatDau)
+	end
 end
 go
 
@@ -406,3 +470,82 @@ as begin
 	where MaSuat=@MaSuat
 end
 go
+
+-- USP of TongThoiLuongofMaCum
+create proc USP_GetAllTongThoiLongofCum
+as begin
+	select KH.MaCum,sum(P.ThoiLuong) as "TongThoiLuong"
+	from Phim as P,KeHoach as KH
+	where P.MaPhim = KH.MaPhim
+	group by KH.MaCum
+end
+go
+
+create proc USP_GetTongThoiLongbyMaCum 
+@MaCum varchar(5)
+as begin
+select KH.MaCum,sum(P.ThoiLuong) as "TongThoiLuong"
+from Phim as P,KeHoach as KH
+where P.MaPhim = KH.MaPhim and KH.MaCum = @MaCum --'CR001'
+group by KH.MaCum
+end 
+go
+
+-- USP of TongThoiLuongofMaRap
+-- Cần lấy ra Rạp X nào đó vào 1 ngày cụ thể có thời lượng chiếu là bao nhiêu
+-- để so sánh với tổng thời gian chiếu trong ngày
+
+
+create proc intGetTongThoiLuongbyMaRap 
+@MaRap varchar(5), @NgayChieu DateTime
+as begin
+	select LC.MaRap,sum(P.ThoiLuong) as "TongThoiLuong"
+	from Phim as P,LichChieu as LC
+	where P.MaPhim = LC.MaPhim and LC.NgayChieu=@NgayChieu and LC.MaRap=@MaRap
+	group by LC.MaRap
+end
+go
+
+
+select * from Phim
+select * from LichChieu
+
+
+
+-- USP of CumRapRapDAO
+select R.MaCum,CR.TenCum,CR.DiaChi,R.MaRap,R.TongGhe
+from CumRap as CR,Rap as R 
+where CR.MaCum=R.MaCum and CR.MaCum='CR001'
+
+select CR.MaCum,CR.TenCum,sum(TongGhe) as 'TongSoGhe'
+from CumRap as CR,Rap as R 
+where CR.MaCum=R.MaCum
+group by CR.MaCum,CR.TenCum
+
+
+-- USP of ThoiLuongPhim vs CumRap
+select * 
+from Phim as P,CumRap as CR,KeHoach as KH
+where P.MaPhim = KH.MaPhim and CR.MaCum=KH.MaCum
+
+select * 
+from Phim as P,CumRap as CR,KeHoach as KH
+where P.MaPhim = KH.MaPhim and CR.MaCum=KH.MaCum and KH.MaCum = 'CR001'
+
+
+
+-- trigger of SuatChieu
+delete trigger UTG_ChuoiMaSuat
+on SuatChieu
+instead of insert
+as 
+declare @MaSuat varchar(3),@GioBatDau int,@PhutBatDau int
+select @MaSuat=@MaSuat,@GioBatDau=GioBatDau,@PhutBatDau=PhutBatDau
+from inserted
+insert into SuatChieu values(@MaSuat,@GioBatDau,@PhutBatDau)
+go
+
+INSERT INTO SuatChieu(GioBatDau,PhutBatDau) VALUES (4,20)
+select * from SuatChieu
+
+

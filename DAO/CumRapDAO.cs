@@ -54,6 +54,7 @@ namespace DAO
 
         public bool DeleteCumRap(string MaCum)
         {
+            KeHoachDAO.Instance.DeletekeHoachofCumRap(MaCum);
             RapDAO.Instance.DeleteRapofCumRap(MaCum);
             string query = "USP_DeleteCumRap @MaCum";
             int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { MaCum });
