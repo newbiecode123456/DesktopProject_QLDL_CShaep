@@ -97,7 +97,6 @@ namespace QuanLyDuLieu
                 txtTenPhim.Text = "";
                 btnThemPhimMoi.Text = "Huỷ thêm phim mới";
             }
-            
         }
 
         private void btnThemPhim_Click(object sender, EventArgs e)
